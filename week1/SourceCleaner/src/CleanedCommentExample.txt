@@ -1,0 +1,9 @@
+public class CommentExample {
+public static void main(String[] args) {
+int number = 10;
+System.out.println("Hello, World!");
+if (number > 5) {
+System.out.println("The number is greater than 5");
+}
+}
+}

@@ -1,0 +1,9 @@
+program PascalComments
+var
+isOnGod : boolean;
+isActive : boolean;
+begin
+isActive := false;
+isOnGod := NOT isActive;
+writeln('what''s the GAP status? ', NOT 65 = 55)
+end.
