@@ -6,7 +6,9 @@ import java.util.regex.Pattern;
 
 public class ParseVariables {
     static void parseVariables(List<String> lines) {
-        Pattern pattern = Pattern.compile("(\\w+)\\s+(\\w+)(?:\\s*=\\s*(.*?))?;");
+        Pattern pattern = Pattern.compile(
+                "(final\\s+)?(\\w+)(\\[\\])?\\s+(\\w+)(?:\\s*=\\s*([^,;]+))?(?:,\\s*(\\w+)(?:\\s*=\\s*([^,;]+))?)*;"
+        );
         Map<String, String> defaultValues = getDefaultValues();
 
         for (int i = 0; i < lines.size(); i++) {

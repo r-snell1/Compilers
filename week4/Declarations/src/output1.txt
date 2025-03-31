@@ -1,0 +1,419 @@
+Parsing variables from file: tester.txt
+
+Line 1: import java.io.BufferedReader;
+Parsed output for line 1
+
+Line 2: import java.io.FileReader;
+Parsed output for line 2
+
+Line 3: import java.io.IOException;
+Parsed output for line 3
+
+Line 4: import java.util.ArrayList;
+Parsed output for line 4
+
+Line 5: import java.util.List;
+Parsed output for line 5
+
+Line 6: import java.util.Set;
+Parsed output for line 6
+
+Line 7: import java.util.StringTokenizer;
+Parsed output for line 7
+
+Line 8: import static java.lang.System.out;
+Parsed output for line 8
+
+Line 9: 
+Parsed output for line 9
+
+Line 10: 
+Parsed output for line 10
+
+Line 11: public class ControlChecker {
+Parsed output for line 11
+
+Line 12: private static final Set<String> KEYWORDS = Set.of("if", "else", "while", "do", "for");
+Parsed output for line 12
+
+Line 13: private static final Set<String> OPERATORS = Set.of("=", "<", "<=", ">", ">=", "==", "!=", "+", "-", "*", "/");
+Parsed output for line 13
+
+Line 14: private static final Set<String> DELIMITERS = Set.of("(", ")", "{", "}", ";");
+Parsed output for line 14
+
+Line 15: 
+Parsed output for line 15
+
+Line 16: public static void main(String[] args) {
+Parsed output for line 16
+
+Line 17: if (args.length != 1) {
+Parsed output for line 17
+
+Line 18: out.println("Usage: java ControlChecker <filename>");
+Parsed output for line 18
+
+Line 19: return;
+Parsed output for line 19
+
+Line 20: }// end if
+Parsed output for line 20
+
+Line 21: 
+Parsed output for line 21
+
+Line 22: String filename = args[0];
+Parsed output for line 22
+
+Line 23: List<String> statements = readFromFile(filename);
+Parsed output for line 23
+
+Line 24: 
+Parsed output for line 24
+
+Line 25: if (statements == null || statements.isEmpty()) {
+Parsed output for line 25
+
+Line 26: out.println("ERROR: Unable to read from file or file is empty");
+Parsed output for line 26
+
+Line 27: return;
+Parsed output for line 27
+
+Line 28: }// end if
+Parsed output for line 28
+
+Line 29: 
+Parsed output for line 29
+
+Line 30: for (String statement : statements) {
+Parsed output for line 30
+
+Line 31: out.println("Processing: " + statement);
+Parsed output for line 31
+
+Line 32: List<String> tokens = tokenize(statement);
+Parsed output for line 32
+
+Line 33: if (tokens == null) {
+Parsed output for line 33
+
+Line 34: out.println("LEXICAL ERROR: The control statement is not in the correct format");
+Parsed output for line 34
+
+Line 35: continue;
+Parsed output for line 35
+
+Line 36: }// end if
+Parsed output for line 36
+
+Line 37: 
+Parsed output for line 37
+
+Line 38: if (!isValidSyntax(tokens)) {
+Parsed output for line 38
+
+Line 39: out.println("SYNTAX ERROR: The control statement is not in the correct format");
+Parsed output for line 39
+
+Line 40: continue;
+Parsed output for line 40
+
+Line 41: }// end if
+Parsed output for line 41
+
+Line 42: 
+Parsed output for line 42
+
+Line 43: out.println("SUCCESS: The control statement is in the correct format");
+Parsed output for line 43
+
+Line 44: }// end for
+Parsed output for line 44
+
+Line 45: }// end main
+Parsed output for line 45
+
+Line 46: 
+Parsed output for line 46
+
+Line 47: private static List<String> readFromFile(String filename) {
+Parsed output for line 47
+
+Line 48: List<String> statements = new ArrayList<>();
+Parsed output for line 48
+
+Line 49: try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+Parsed output for line 49
+
+Line 50: String line;
+Parsed output for line 50
+
+Line 51: while ((line = br.readLine()) != null) {
+Parsed output for line 51
+
+Line 52: if (!line.trim().isEmpty()) {
+Parsed output for line 52
+
+Line 53: statements.add(line.trim());
+Parsed output for line 53
+
+Line 54: }// end if
+Parsed output for line 54
+
+Line 55: }// end while
+Parsed output for line 55
+
+Line 56: } catch (IOException e) {
+Parsed output for line 56
+
+Line 57: return null;
+Parsed output for line 57
+
+Line 58: }// end try catch
+Parsed output for line 58
+
+Line 59: return statements;
+Parsed output for line 59
+
+Line 60: }// end method
+Parsed output for line 60
+
+Line 61: 
+Parsed output for line 61
+
+Line 62: private static List<String> tokenize(String statement) {
+Parsed output for line 62
+
+Line 63: List<String> tokens = new ArrayList<>();
+Parsed output for line 63
+
+Line 64: StringTokenizer tokenizer = new StringTokenizer(statement, "(){};=<>!+-*/ ", true);
+Parsed output for line 64
+
+Line 65: while (tokenizer.hasMoreTokens()) {
+Parsed output for line 65
+
+Line 66: String token = tokenizer.nextToken().trim();
+Parsed output for line 66
+
+Line 67: if (token.isEmpty()) continue;
+Parsed output for line 67
+
+Line 68: 
+Parsed output for line 68
+
+Line 69: if (KEYWORDS.contains(token) ||
+Parsed output for line 69
+
+Line 70: OPERATORS.contains(token) ||
+Parsed output for line 70
+
+Line 71: DELIMITERS.contains(token) ||
+Parsed output for line 71
+
+Line 72: token.matches("[a-zA-Z_][a-zA-Z0-9_]*") ||
+Parsed output for line 72
+
+Line 73: token.matches("\\d+")) {
+Parsed output for line 73
+
+Line 74: tokens.add(token);
+Parsed output for line 74
+
+Line 75: } else {
+Parsed output for line 75
+
+Line 76: return null;
+Parsed output for line 76
+
+Line 77: }// end if else
+Parsed output for line 77
+
+Line 78: }// end while
+Parsed output for line 78
+
+Line 79: return tokens;
+Parsed output for line 79
+
+Line 80: }// end method
+Parsed output for line 80
+
+Line 81: 
+Parsed output for line 81
+
+Line 82: private static boolean isValidSyntax(List<String> tokens) {
+Parsed output for line 82
+
+Line 83: if (tokens.isEmpty()) return false;
+Parsed output for line 83
+
+Line 84: 
+Parsed output for line 84
+
+Line 85: String firstToken = tokens.get(0);
+Parsed output for line 85
+
+Line 86: if (!KEYWORDS.contains(firstToken)) return false;
+Parsed output for line 86
+
+Line 87: 
+Parsed output for line 87
+
+Line 88: if (firstToken.equals("if")) {
+Parsed output for line 88
+
+Line 89: if (tokens.size() < 5 || !tokens.get(1).equals("(")) return false;
+Parsed output for line 89
+
+Line 90: 
+Parsed output for line 90
+
+Line 91: int closingParenIndex = tokens.indexOf(")");
+Parsed output for line 91
+
+Line 92: if (closingParenIndex == -1 || closingParenIndex + 2 >= tokens.size()) return false;
+Parsed output for line 92
+
+Line 93: 
+Parsed output for line 93
+
+Line 94: if (!tokens.get(closingParenIndex + 2).equals("=")) return false;
+Parsed output for line 94
+
+Line 95: 
+Parsed output for line 95
+
+Line 96: if (!tokens.get(tokens.size() - 1).equals(";")) return false;
+Parsed output for line 96
+
+Line 97: 
+Parsed output for line 97
+
+Line 98: int elseIndex = tokens.indexOf("else");
+Parsed output for line 98
+
+Line 99: if (elseIndex != -1) {
+Parsed output for line 99
+
+Line 100: if (elseIndex + 2 >= tokens.size() || !tokens.get(elseIndex + 2).equals("=") ||
+Parsed output for line 100
+
+Line 101: !tokens.get(tokens.size() - 1).equals(";")) {
+Parsed output for line 101
+
+Line 102: return false;
+Parsed output for line 102
+
+Line 103: }// end if
+Parsed output for line 103
+
+Line 104: }// end if
+Parsed output for line 104
+
+Line 105: 
+Parsed output for line 105
+
+Line 106: return true;
+Parsed output for line 106
+
+Line 107: }// end if
+Parsed output for line 107
+
+Line 108: 
+Parsed output for line 108
+
+Line 109: if (firstToken.equals("while")) {
+Parsed output for line 109
+
+Line 110: return tokens.size() >= 5 &&
+Parsed output for line 110
+
+Line 111: tokens.get(1).equals("(") &&
+Parsed output for line 111
+
+Line 112: tokens.contains(")") &&
+Parsed output for line 112
+
+Line 113: tokens.contains("=") &&
+Parsed output for line 113
+
+Line 114: tokens.getLast().equals(";");
+Parsed output for line 114
+
+Line 115: }// end if
+Parsed output for line 115
+
+Line 116: 
+Parsed output for line 116
+
+Line 117: if (firstToken.equals("do")) {
+Parsed output for line 117
+
+Line 118: return tokens.size() >= 6 &&
+Parsed output for line 118
+
+Line 119: tokens.get(1).matches("[a-zA-Z_][a-zA-Z0-9_]*") &&
+Parsed output for line 119
+
+Line 120: tokens.get(2).equals("=") &&
+Parsed output for line 120
+
+Line 121: tokens.get(tokens.size() - 3).equals("while") &&
+Parsed output for line 121
+
+Line 122: tokens.get(tokens.size() - 2).equals("(") &&
+Parsed output for line 122
+
+Line 123: tokens.getLast().equals(")");
+Parsed output for line 123
+
+Line 124: }// end if
+Parsed output for line 124
+
+Line 125: 
+Parsed output for line 125
+
+Line 126: if (firstToken.equals("for")) {
+Parsed output for line 126
+
+Line 127: return tokens.size() >= 9 &&
+Parsed output for line 127
+
+Line 128: tokens.get(1).equals("(") &&
+Parsed output for line 128
+
+Line 129: tokens.get(2).matches("[a-zA-Z_][a-zA-Z0-9_]*") &&
+Parsed output for line 129
+
+Line 130: tokens.get(3).equals("=") &&
+Parsed output for line 130
+
+Line 131: tokens.get(5).equals(";") &&
+Parsed output for line 131
+
+Line 132: tokens.get(7).equals(";") &&
+Parsed output for line 132
+
+Line 133: tokens.get(tokens.size() - 2).equals(")") &&
+Parsed output for line 133
+
+Line 134: tokens.getLast().equals(";");
+Parsed output for line 134
+
+Line 135: }// end if
+Parsed output for line 135
+
+Line 136: 
+Parsed output for line 136
+
+Line 137: return false;
+Parsed output for line 137
+
+Line 138: }// end method
+Parsed output for line 138
+
+Line 139: }// end class
+Parsed output for line 139
+
